@@ -19,7 +19,7 @@ export class iocContainer<T> {
         this.registry[key] = {type: moduleTypes.SINGLETON, fn: module, params: params?params:[]}
     }
 
-    public use(key: string): T {
+    public $import(key: string): T {
         const module = this.registry[key]
         if(module.type == moduleTypes.SINGLETON) {
             if(this.singletonCache[key]) {
