@@ -1,7 +1,6 @@
 # Needle
 ![A needle.](https://i.imgur.com/FwUP9wj.jpeg)
 
-<br>
 ## What is Needle?
 Needle is a dependency injection library for Typescript. It is framework-agnostic and can run anywhere where Javascript can.
 <br>
@@ -25,8 +24,13 @@ interface dependencies {
 }
 ```
 This tells Needle that you want to create a container which will hold a dependancy of class helloWorld.
+
 However, at the moment this isn't very useful. You can't actually use your helloWorld dependency. We can store our class in the container with `container.bind(className: string, moduleName: string, bindingProcess: ($container: iocContainer) => any)`.
+
 Let's examine each parameter of the bind function.
+
 className is the literal name of your class. This is case sensitive and lets you use intellisense. In this case, it is `helloWorld`. 
+
 moduleName can be anything you want. It is simply a string that will be used to identify your module. Let's call it `Example/HelloWorld`.
+
 bindingProcess is the setup for your dependency. It should return a new instance of your class. Real world dependencies usually have dependencies themselves, so you can use this function to import modules. 
