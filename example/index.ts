@@ -1,23 +1,7 @@
-import { iocContainer, moduleFunction } from ".."
+import { $import } from "./module"
 
-class HelloWorld {
 
-    public message = "Hello world!"
+let { HelloWorld } = $import("HelloWorld")
 
-    public static bind($container: iocContainer<injection>) {
-        $container.bind("HelloWorld", () => new HelloWorld())
-    }
-}
-
-interface injection {
-    HelloWorld?: HelloWorld
-}
-
-const { load, $import } = new iocContainer<injection>()
-
-load(HelloWorld)
-
-let hi = $import("HelloWorld")
-
-console.log(hi.HelloWorld.message)
+console.log(HelloWorld.message)
 
