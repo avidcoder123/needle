@@ -1,18 +1,23 @@
 import { iocContainer, moduleFunction } from ".."
 
 class HelloWorld {
+
     public message = "Hello world!"
+
+    public static bind($container: iocContainer<injection>) {
+        $container.bind("HelloWorld", () => new HelloWorld())
+    }
 }
 
 interface injection {
     HelloWorld?: HelloWorld
 }
 
-const $container = new iocContainer<injection>()
+const { load, $import } = new iocContainer<injection>()
 
-$container.bind("HelloWorld", ($container) => { return new HelloWorld()})
+load(HelloWorld)
 
-let hi = $container.$import("HelloWorld")
+let hi = $import("HelloWorld")
 
 console.log(hi.HelloWorld.message)
 

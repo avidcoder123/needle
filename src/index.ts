@@ -7,20 +7,30 @@ enum moduleTypes {
 
 
 export class iocContainer<T> {
+
     private singletonCache: T
 
     private registry: {[key: string]: {type: moduleTypes, fn: moduleFunction<T>, params?: Array<any>}} = {}
 
-    public bind(key: string, module: moduleFunction<T>, params?: Array<any>): void {
+    public bind = (key: string, module: moduleFunction<T>, params?: Array<any>): void => {
         this.registry[key] = {type: moduleTypes.NORMAL, fn: module, params: params?params:[]}
     }
 
-    public singleton(key: string, module: moduleFunction<T>, params?: Array<any>): void {
+    public singleton = (key: string, module: moduleFunction<T>, params?: Array<any>): void => {
         this.registry[key] = {type: moduleTypes.SINGLETON, fn: module, params: params?params:[]}
     }
 
-    public $import(key: string): T {
+    public load = (...classNames: any): void => {
+        for(let className of classNames) {
+            className.bind(this)
+        }
+    }
+
+    public $import = (key: string): T => {
         const module = this.registry[key]
+        if(!module) {
+            throw new Error("Module " + key + " could not be resolved.")
+        }
         if(module.type == moduleTypes.SINGLETON) {
             if(this.singletonCache[key]) {
                 return this.singletonCache
