@@ -10,7 +10,8 @@ test.group("Test dependency injection", async function() {
     })
 
     test("Make sure singleton returns same instance", async function(assert) {
-        let firstBind = $import("singletonBind").singletonBind
+        let firstBind:any = $import("singletonBind")
+        firstBind = firstBind.singletonBind
         firstBind.message = "Bye"
         let secondBind = $import("singletonBind").singletonBind
         assert.equal(secondBind.message, "Bye")

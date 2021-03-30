@@ -8,7 +8,7 @@ enum moduleTypes {
 
 export class iocContainer<T> {
 
-    private singletonCache: T
+    private singletonCache = {}
 
     private registry: {[key: string]: {type: moduleTypes, fn: moduleFunction<T>, params?: Array<any>}} = {}
 
@@ -28,19 +28,17 @@ export class iocContainer<T> {
 
     public $import = (key: string): T => {
         const module = this.registry[key]
-        console.log(this.registry)
         if(!module) {
             throw new Error("Module " + key + " could not be resolved.")
         } else if(module.type == moduleTypes.SINGLETON) {
-            console.log(this.singletonCache)
-            console.log(module.fn(this, ...module.params))
-            if(this.singletonCache[key]) {
-                console.log(this.singletonCache)
-                return this.singletonCache
+            if(key in this.singletonCache) {
+                if (this.singletonCache == undefined) {
+                    throw new Error("Somethigs up")
+                }
+                return this.singletonCache as T
             } else {
                 this.singletonCache[key] = module.fn(this, ...module.params)
-                console.log(this.singletonCache)
-                return this.singletonCache
+                return this.singletonCache as T
             }
         } else {
             return {[key]: module.fn(this, ...module.params)} as T
