@@ -4,7 +4,7 @@ class normalBind {
     public message = "Hello"
 
     public static bind($container: iocContainer<testModule>) {
-        $container.bind("normalBind", () => new normalBind())
+        $container.bind("normalBind", "App/Test/Normal", () => new normalBind())
     }
 }
 
@@ -12,7 +12,7 @@ class singletonBind {
     public message = "Hello"
 
     public static bind($container: iocContainer<testModule>) {
-        $container.singleton("singletonBind", () => new singletonBind())
+        $container.singleton("singletonBind", "App/Test/Singleton", () => new singletonBind())
     }
 }
 

@@ -3,16 +3,16 @@ import { $import } from './module'
 
 test.group("Test dependency injection", async function() {
     test("Make sure normal bind returns different instance", async function(assert) {
-        let firstBind = $import("normalBind").normalBind
+        let firstBind = $import("App/Test/Normal").normalBind
         firstBind.message = "Bye"
-        let secondBind = $import("normalBind").normalBind
+        let secondBind = $import("App/Test/Normal").normalBind
         assert.notEqual(secondBind.message, "Bye")
     })
 
     test("Make sure singleton returns same instance", async function(assert) {
-        let firstBind = $import("singletonBind").singletonBind
+        let firstBind = $import("App/Test/Singleton").singletonBind
         firstBind.message = "Bye"
-        let secondBind = $import("singletonBind").singletonBind
+        let secondBind = $import("App/Test/Singleton").singletonBind
         assert.equal(secondBind.message, "Bye")
     })
 })
