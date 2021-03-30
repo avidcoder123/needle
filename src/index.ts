@@ -1,4 +1,4 @@
-export type moduleFunction<T> = ($container: iocContainer<T>, ...params) => any
+export type moduleFunction<T> = ($container: iocContainer<T>, ...params: Array<any>) => any
 
 enum moduleTypes {
     NORMAL = 0,
@@ -28,14 +28,18 @@ export class iocContainer<T> {
 
     public $import = (key: string): T => {
         const module = this.registry[key]
+        console.log(this.registry)
         if(!module) {
             throw new Error("Module " + key + " could not be resolved.")
-        }
-        if(module.type == moduleTypes.SINGLETON) {
+        } else if(module.type == moduleTypes.SINGLETON) {
+            console.log(this.singletonCache)
+            console.log(module.fn(this, ...module.params))
             if(this.singletonCache[key]) {
+                console.log(this.singletonCache)
                 return this.singletonCache
             } else {
                 this.singletonCache[key] = module.fn(this, ...module.params)
+                console.log(this.singletonCache)
                 return this.singletonCache
             }
         } else {

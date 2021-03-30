@@ -1,4 +1,4 @@
-import { iocContainer, moduleFunction } from ".."
+import { iocContainer } from ".."
 
 class HelloWorld {
 
@@ -10,7 +10,7 @@ class HelloWorld {
 }
 
 interface injection {
-    HelloWorld?: HelloWorld
+    HelloWorld: HelloWorld
 }
 
 const $container = new iocContainer<injection>()
