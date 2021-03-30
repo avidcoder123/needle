@@ -1,7 +1,6 @@
 import { $import } from "./module"
 
 
-let { HelloWorld } = $import("HelloWorld")
+let { HelloWorld } = $import("App/Example/HelloWorld")
 
 console.log(HelloWorld.message)
-

@@ -5,7 +5,7 @@ class HelloWorld {
     public message = "Hello world!"
 
     public static bind($container: iocContainer<injection>) {
-        $container.bind("HelloWorld", () => new HelloWorld())
+        $container.bind("HelloWorld","App/Example/HelloWorld", () => new HelloWorld())
     }
 }
 
