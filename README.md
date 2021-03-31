@@ -41,9 +41,9 @@ Let's examine each parameter of the bind function.
 
 ```typescript
 container.bind(
-"helloWorld",
-"Example/HelloWord",
-(container)=>new helloWorld()
+  "helloWorld",
+  "Example/HelloWord",
+  (container)=>new helloWorld()
 )
 ```
 
@@ -62,9 +62,9 @@ You may notice that every time you $inport the module, it creates a new instance
 The parameters for registering a singleton is the same as the one for binding. Let's do the same thing:
 ```typescript
 container.singleton(
-"helloWorld",
-"Example/Singleton",
-(container)=>new helloWorld
+  "helloWorld",
+  "Example/Singleton",
+  (container)=>new helloWorld
 )
 ```
 Now when we $import our module it will create the class once and cache the result for reuse. The $import function works both on normal modules and singletons.
@@ -76,9 +76,9 @@ It can be tedious to manually bind your dependencies yourself in one file. To so
 class helloWorld{
   public static bind(container: iocContainer<dependencies>) {
     container.bind(
-    "helloWorld",
-    "Example/HelloWorld"
-    ()=>new helloWorld()
+      "helloWorld",
+      "Example/HelloWorld"
+      ()=>new helloWorld()
     )
   }
 }
