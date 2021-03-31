@@ -39,10 +39,10 @@ export class iocContainer<T> {
             throw new Error("Module " + key + " could not be resolved.")
         } else if(module.type == moduleTypes.SINGLETON) {
             if(key in this.singletonCache) {
-                return this.singletonCache as T
+                return {[key]: this.singletonCache[key]} as T
             } else {
                 this.singletonCache[key] = module.fn(this, ...module.params)
-                return this.singletonCache as T
+                return {[key]: this.singletonCache[key]} as T
             }
         } else {
             return {[key]: module.fn(this, ...module.params)} as T
