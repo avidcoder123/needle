@@ -10,14 +10,14 @@ export class iocContainer<T> {
 
     private singletonCache = {}
 
-    private registry: {[key: string]: {moduleName: string, type: moduleTypes, fn: moduleFunction<T>, params?: Array<any>}} = {}
+    private registry: {[key: string]: {moduleName: string, type: moduleTypes, fn: moduleFunction<T>}} = {}
 
-    public bind = (key: string, moduleName: string, module: moduleFunction<T>, params?: Array<any>): void => {
-        this.registry[key] = {moduleName, type: moduleTypes.NORMAL, fn: module, params: params?params:[]}
+    public bind = (key: string, moduleName: string, module: moduleFunction<T>): void => {
+        this.registry[key] = {moduleName, type: moduleTypes.NORMAL, fn: module}
     }
 
-    public singleton = (key: string, moduleName: string, module: moduleFunction<T>, params?: Array<any>): void => {
-        this.registry[key] = {moduleName, type: moduleTypes.SINGLETON, fn: module, params: params?params:[]}
+    public singleton = (key: string, moduleName: string, module: moduleFunction<T>): void => {
+        this.registry[key] = {moduleName, type: moduleTypes.SINGLETON, fn: module}
     }
 
     public load = (...classNames: any): void => {
@@ -36,16 +36,16 @@ export class iocContainer<T> {
         }
         const module = this.registry[key]
         if(!module) {
-            throw new Error("Module " + key + " could not be resolved.")
+            throw new Error("Module " + name + " could not be resolved.")
         } else if(module.type == moduleTypes.SINGLETON) {
             if(key in this.singletonCache) {
                 return {[key]: this.singletonCache[key]} as T
             } else {
-                this.singletonCache[key] = module.fn(this, ...module.params)
+                this.singletonCache[key] = module.fn(this)
                 return {[key]: this.singletonCache[key]} as T
             }
         } else {
-            return {[key]: module.fn(this, ...module.params)} as T
+            return {[key]: module.fn(this)} as T
         }
     }
 }

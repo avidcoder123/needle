@@ -17,9 +17,10 @@ class singletonBind {
 }
 
 
+
 export interface testModule {
     normalBind: normalBind,
-    singletonBind: singletonBind,
+    singletonBind: singletonBind
 }
 
 const $container = new iocContainer<testModule>()

@@ -15,4 +15,11 @@ test.group("Test dependency injection", async function() {
         let secondBind = $import("App/Test/Singleton").singletonBind
         assert.equal(secondBind.message, "Bye")
     })
+
+    test("Nonexistant module should throw error", async function(assert) {
+        assert.throw(
+            () => $import("App/Test/NonExistant"),
+            "Module App/Test/NonExistant could not be resolved."
+        )
+    })
 })
