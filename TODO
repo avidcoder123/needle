@@ -1,0 +1,1 @@
+Make $inject singleton only return the requested module just like for normal modules
