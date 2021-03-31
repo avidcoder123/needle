@@ -1,14 +1,16 @@
 {
-  "name": "needle",
+  "name": "needle-ioc",
   "version": "1.0.0",
   "description": "Quick and painless dependency injection.",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "example": "example",
     "test": "test"
   },
   "scripts": {
-    "test": "ts-node japaFile.ts"
+    "test": "ts-node japaFile.ts",
+    "prepublish": "tsc --outDir dist"
   },
   "repository": {
     "type": "git",

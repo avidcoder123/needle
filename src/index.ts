@@ -1,4 +1,4 @@
-export type moduleFunction<T> = ($container: iocContainer<T>, ...params: Array<any>) => any
+export type moduleFunction<T> = ($container: iocContainer<T>) => any
 
 enum moduleTypes {
     NORMAL = 0,
