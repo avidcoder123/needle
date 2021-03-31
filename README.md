@@ -13,7 +13,7 @@ To start using Needle, you will need to create an IoC container to store your de
 You will also need to create a container interface for Intellisense to work properly.
 This interface will list every single class you would like to store in your container. Here is an example:
 ```typescript 
-import { iocContainer } from 'needle';
+import { iocContainer } from 'needle-ioc';
 
 class helloWorld {}
 
