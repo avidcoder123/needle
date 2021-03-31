@@ -64,7 +64,7 @@ The parameters for registering a singleton is the same as the one for binding. L
 container.singleton(
   "helloWorld",
   "Example/Singleton",
-  (container)=>new helloWorld
+  (container)=>new helloWorld()
 )
 ```
 Now when we $import our module it will create the class once and cache the result for reuse. The $import function works both on normal modules and singletons.
