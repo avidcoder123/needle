@@ -74,7 +74,7 @@ Now when we $import our module it will create the class once and cache the resul
 It can be tedious to manually bind your dependencies yourself in one file. To solve this, Needle lets you load a class file so it can automatically bind itself to the container. We can define our binding login in a static class method named `bind`. Let's do it with our `helloWorld` class:
 ```typescript
 class helloWorld{
-  public static bind(container) {
+  public static bind(container: iocContainer<dependencies>) {
     container.bind(
     "helloWorld",
     "Example/HelloWorld"
