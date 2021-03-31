@@ -87,3 +87,41 @@ Now instead of writing our binding logic in one file, we can just run
 ```typescript
 container.load(helloWorld)
 ```
+
+# API Docs
+
+`type moduleFunction<T> = ($container: iocContainer<T>) => any`
+$container: IoC container to store dependency
+
+`container.bind(key: string, moduleName: string, fn: moduleFunction<T>) => void`
+key: Literal class name of the dependency.
+moduleName: String namespace for dependency.
+fn: Factory function to bootstrap and setup dependency
+
+Binds a module to the IoC container.
+
+<br>
+
+`container.singleton(key: string, moduleName: string, fn: moduleFunction<T>) => void`
+
+key: Literal class name of the dependency.
+moduleName: String namespace for dependency.
+fn: Factory function to bootstrap and setup dependency
+
+Binds a singleton to the IoC container.
+
+<br>
+
+`container.load(...classes: any) => void`
+
+...classes: Class objects of modules you want to load
+
+Runs `.bind` static function on classes to load them.
+
+<br>
+
+`container.$import(moduleName: string) => T`
+
+moduleName: String namespace of dependency you want to load.
+
+Imports a dependency from the IoC container.
