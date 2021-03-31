@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "ts-node japaFile.ts",
-    "prepublish": "tsc --outDir dist"
+    "prepublish": "rm -rf dist && tsc --outDir dist"
   },
   "repository": {
     "type": "git",
