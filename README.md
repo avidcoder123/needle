@@ -93,6 +93,8 @@ container.load(helloWorld)
 `type moduleFunction<T> = ($container: iocContainer<T>) => any`
 $container: IoC container to store dependency
 
+<br>
+
 `container.bind(key: string, moduleName: string, fn: moduleFunction<T>) => void`
 key: Literal class name of the dependency.
 moduleName: String namespace for dependency.
